@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="editor" content="emacs :)"/>
+    <meta name="author" content="Jules Clement">
+    <title>GitHub Issues Browser - JavaScript SPA Task (Backbone)</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/jquery-ui.custom.min.js"></script>
+    <script src="libs/underscore.min.js"></script>
+    <script src="libs/backbone.min.js"></script>
+    <script src="libs/backbone.marionette.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1><a href="index.html">GitHub Issues Browser</a></h1>
+    </header>
+    <main></main>
+    <aside></aside>
+    <footer>
+      <div span="app">JavaScript SPA (using Backbone &amp; Marionette)</div>
+      <div>
+      <span class="copy">&copy; 2015 <a href="http://www.wtfpl.net/" rel="license"><abbr>WTFPL</abbr></a></span> -
+      <span class="vcard">
+        <span class="author"><em class="fn">Jules Clement</em> <a class="email" href="mailto:jules@ker.bz">jules@ker.bz</a></span>
+      </span>
+      </div>
+    </footer>
+
+
+
+    <!-- Template: message -->
+    <script type="text/template" id="message-template">
+        <p<% if (style) { print(' class="'+ style +'"'); } %>><%= message %></p>
+    </script>
+    <!-- Template: spinner -->
+    <script type="text/template" id="spinner-template">
+      <img src="spinner.gif"/>
+    </script>
+
+
+
+    <!-- Templates for Issue page               -->
+    <!--   issuedetail: the page layout         -->
+    <!--   issueheader: issue title + nav       -->
+    <!--   issue:       the issue details       -->
+    <script type="text/template" id="issuedetail-template">
+      <header></header>
+      <article></article>
+    </script>
+
+    <script type="text/template" id="issueheader-template">
+      <nav>
+        <a href="#<%= repository.full_name %>"><%= repository.full_name %></a>
+      </nav>
+    </script>
+    
+    <script type="text/template" id="issue-template">
+      <header>
+        <h2><%= title %><span id="issue-number"><%= number %></span></h2>
+      </header>
+      <article id="detail">
+        <div class="state <%= state %>">
+          <span class="label">This issue is</span>
+          <span id="issue-state"><%= state %></span>
+        </div>
+        <span id="created"> by <%= user.login %>
+          on <%= (new Date(created_at)).toLocaleString() %></span>
+<% if ( updated_at !== created_at ) { %>
+        <span id="updated">Last updated:
+          <%= (new Date(updated_at)).toLocaleString() %></span>
+<% } %>
+        <p><%= _.escape(body) %></p>
+      </article>
+    </script>
+
+    
+
+    <!-- Template for Repository search / Issues list page -->
+    <!--   repositorysearch     main page layout -->
+    <!--   search               the search form -->
+    <!--   issueslist           search result layout -->
+    <!--   issues               display issues list in a tabular way -->
+    <!--   issuesrow            a row with an Issue -->
+    <!--   issuespager          the pager for the issues list -->
+    <script type="text/template" id="repositorysearch-template">
+      <header></header>
+      <article><p>Please indicate a GitHub Username and Repository to
+          get a list of Issues</p></article>
+    </script>
+
+    <script type="text/template" id="search-template">
+      <form id="search-form" action="" method="POST">
+        <label for="username">Username
+        <input type="text" name="username" id="username" value="<%= username %>" tabindex="1" autofocus required/></label>
+        <label for="repository">Repository
+        <input type="text" name="repository" id="repository" value="<%= repository %>" tabindex="2" autocomplete="off" list="repositories" placeholder="Select a Repository"/></label>
+        <label for="per_page">Items per page
+          <input type="number" name="per_page" id="per_page" size="2" min="1" max="100" value="<%= per_page %>" tabindex="3" required="required"/></label>
+        <input type="submit" tabindex="4" value="search"/>
+      </form>
+    </script>
+
+    <script type="text/template" id="issueslist-template">
+      <content></content>
+      <footer></footer>
+    </script>
+
+    <script type="text/template" id="noissues-template">
+      <tbody class="noissues"><tr>
+          <td>This repository have no issues to display!</td>
+      </tr></tbody>
+    </script>
+
+    <script type="text/template" id="issues-template">
+      <thead>
+        <tr>
+          <th>number</th>
+          <th>title</th>
+          <th>date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </script>
+
+    <script type="text/template" id="issuerow-template">
+      <td><a href="#<%= repository.full_name +'/issue/' + issue.number %>"><%= issue.number %></a></td>
+      <td class="state <%= issue.state %>"><%= issue.title %></td>
+      <td><%= (new Date(issue.created_at)).toLocaleString() %></td>
+    </script>
+
+    <script type="text/template" id="issuespager-template">
+<% if (links.last || page > 1) { %>
+      <nav id="pager">
+      <ul>
+<% _.each(['first', 'prev'], function (i) { %>
+        <li><a rel="<%= i %>"<% if (links[i]) { %> href="#<%= url %>/page=<%= links[i] %>"<% } %>><%= i %></a></li>
+<% }); %>
+<% _.each(_.range(links.last || page), function (i) { i++; %>
+        <li<% if (i == page) { print(' class="current"'); } %>><a href="#<%= url %>/page=<%= i %>"><%= i %></a></li>
+<% }); %>
+<% _.each(['next', 'last'], function (i) { %>
+        <li><a rel="<%= i %>"<% if (links[i]) { %> href="#<%= url %>/page=<%= links[i] %>"<% } %>><%= i %></a></li>
+<% }); %>
+      </ul>
+      </nav>
+<% } %>
+    </script>
+
+
+    <script src="app/helpers.js"></script>
+    <script src="app/models.js"></script>
+    <script src="app/repositories_collection.js"></script>
+    <script src="app/issue_view.js"></script>    
+    <script src="app/issue_layout.js"></script>    
+    <script src="app/issues_collection.js"></script>    
+    <script src="app/issues_view.js"></script>    
+    <script src="app/issues_layout.js"></script>    
+    <script src="app/search_view.js"></script>
+    <script src="app/search_layout.js"></script>
+    <script src="app/router.js"></script>
+    <script src="main.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,63 @@
+JavaScript SPA Task (Backbone)
+==============================
+
+Author: Jules Clement - jules@ker.bz
+Date:   June 2015
+
+About
+=====
+
+This is a Single Page App that allows you to browse GitHub issues
+for a given repository.
+
+SPA Files Layout
+================
+
+Javascript
+ - main.js      Main
+ - app/         The SPA files
+ - libs/        External libraries
+                (_, jquery, backbone, marionettejs, jquery-ui)
+
+HTML / Template
+ - index.html                   Contain the main layout for the SPA as well as
+                                the templates bits.
+
+CSS / Styling
+ - base.scss                    SCSS
+ - config.rb                    SCSS configuration (for compass)
+ - base.css                     Generated stylesheet
+
+To re-generate the style sheet use 'compass' in scss/, either with 'compile' or
+'watch' (if you want live code/generation on save) options.
+
+Notes on dev
+============
+
+Well, basically I had to learn how to program some modern client-side JS,
+Backbone and all that jazz...
+
+As instructed all this app was coded from scratch, using no particular IDE but
+my plain old emacs (and fingers).
+
+In this exercise, I've tried to make my code minimal, use libraries / framework
+for what they are. I do realize there are still few points that I don't fully get
+and probably still looks ugly in this sample app (specially Marionette ;)
+
+Even though I might not have all the latest tricks or coolest design patterns at
+hands, I've tried to write elegant code and keep everything clean that  should
+be fairly maintainable and robust over time.
+
+What is missing or not in this app (but that wasn't the goal)
+ - Some unit testing and other code enforcing / QA improvements (from jslint
+     to jasmin etc...)
+ - Validation for all user inputs, right? :)
+ - SPA / Module packaging, folding everything under nice class names, compact
+     scripts in 1 file .min.js
+ - Scoping and modern JS wrapping, require and such...
+ - Less agressive view rendering, re-use layout/views... (would need refactoring :)
+ - more 42!
+
+It's "Turtles all the way down"...
+
+--Jules

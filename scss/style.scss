@@ -1,0 +1,392 @@
+/*
+ * JavaScript SPA Task SCSS
+ */
+
+// From default Compass mixin, in: compass/css3/
+@import "css3/border-radius";
+@import "css3/images";
+@import "css3/box-shadow";
+
+// mostly colorset ;)
+$black:         #283237;
+$grey-dark:     #5f6973;
+$grey:          #DEDEDE;
+$grey-light:    #EFEFEF;
+$grey-white:    #F5F5F5;
+$blue:          #289BC8;
+$green:         #AAFFAA;
+$red:           #FF0000;
+
+/*
+ * Basic HTML elements
+ */
+h1, h2, h3, h1 a, nav a {
+    color: $grey-dark;
+    text-decoration: none;
+    margin: 0;
+}
+a {
+    color: $grey-dark;
+}
+a[href]:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-size: .9em;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Geneva, sans-serif;
+
+    /*
+     * Only for direct children ('>header'), that is the page main header & footer
+     */
+    >header,
+    >footer {
+        background-color: $grey-light;
+        color: $grey-dark;
+        clear: both;
+    }
+    >header{
+        margin: 0;
+        padding: 0;
+        font-size: .9em;
+        h1 {
+            margin: 0;
+            padding:  1em;
+            font-size: 1.4em;
+            font-weight: normal;
+        }
+        @include background-image(linear-gradient(to bottom, $grey-white 5%, white)); 
+        &:after {
+            content: ' ';
+            display: block;
+            height: 2.5px;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            /* FTW, stolen from you ;) */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20preserveAspectRatio%3D"none%20slice"%20width%3D"800"%20height%3D"3"%20viewBox%3D"0%200%20800%203"><style%20type%3D"text%2Fcss">.st0%7Bfill%3Aurl%28%23SVGID_1_%29%3B%7D<%2Fstyle><linearGradient%20id%3D"SVGID_1_"%20gradientUnits%3D"userSpaceOnUse"%20x1%3D"-19.943"%20y1%3D"299.886"%20x2%3D"-19.873"%20y2%3D"299.886"%20gradientTransform%3D"matrix%2811446.299%200%200%20-11446.299%20228276.484%203432587%29"><stop%20offset%3D"0"%20stop-color%3D"%23F05576"%2F><stop%20offset%3D".071"%20stop-color%3D"%23F16670"%2F><stop%20offset%3D".145"%20stop-color%3D"%23F3766B"%2F><stop%20offset%3D".214"%20stop-color%3D"%23F68E6B"%2F><stop%20offset%3D".286"%20stop-color%3D"%23FAAD6B"%2F><stop%20offset%3D".357"%20stop-color%3D"%23FDC36F"%2F><stop%20offset%3D".428"%20stop-color%3D"%23FEDF74"%2F><stop%20offset%3D".5"%20stop-color%3D"%23CED57F"%2F><stop%20offset%3D".571"%20stop-color%3D"%23A2CD86"%2F><stop%20offset%3D".643"%20stop-color%3D"%235BC094"%2F><stop%20offset%3D".714"%20stop-color%3D"%2336B69E"%2F><stop%20offset%3D".791"%20stop-color%3D"%231AACA2"%2F><stop%20offset%3D".857"%20stop-color%3D"%2325A4B8"%2F><stop%20offset%3D".928"%20stop-color%3D"%233089AD"%2F><stop%20offset%3D"1"%20stop-color%3D"%2324648C"%2F><%2FlinearGradient><path%20class%3D"st0"%20d%3D"M0%200h800v3H0z"%2F><%2Fsvg>');
+            @include box-shadow(0px 1px 3px .06px rgba($grey-dark, .5));
+        }
+    }
+    >footer{
+        border-top: 1px solid $grey;
+        margin: 1em 0 0 0;
+        padding-bottom: 2em;
+        font-size: .8em;
+        &:before {
+            content: ' ';
+            display: block;
+            border-top: 1px solid white;
+            margin-bottom: 2em;
+        }
+        div {
+            padding: 0 2em;
+            text-align: right;
+        }
+    }
+}
+
+main>section {
+    >header {
+        font-weight: bold;
+        padding: 0 0 .5em 0;
+        color: $grey-dark;
+    }
+    >article {
+        position: relative;
+        min-height: 4em;
+    }
+}
+
+#spinner {
+    position: absolute;
+    top: 2em;
+    left: 1em;
+}
+
+#message {
+    clear: both;
+    margin: 1em 0;
+    p {
+        margin: 0;
+        padding: 1em;
+        background-color: $blue;
+        color: white;
+        @include border-radius(.5em, .5em);
+        &.error {
+            background-color: $red;
+            font-weight: bold;
+        }
+    }
+}
+/*****************************************
+ *
+ * The more specific stuff...
+ */
+.state {
+    &.open {
+        &::before {
+            content: '\26a0';
+            vertical-align: baseline;
+            padding-right: .25em;
+        }
+    }
+    &.closed {
+        &::before {
+            content: '\2713';
+            vertical-align: baseline;
+            padding-right: .25em;
+        }
+    }
+}
+
+/*****************************************
+ *
+ * Issue Detail section
+ */
+#issuedetail {
+    margin: 0 1em;
+    header nav {
+        a {
+            font-size: 1.2em;
+            &::before {
+                margin-right: .1em;
+                content: '\00bb';
+            }
+
+        }
+    }
+    #issue header #issue-number {
+        color: $grey;
+        font-style: italic;
+        &:before { content: ' #'; }
+    }
+    #issue article#detail {
+        border: 1px solid $grey-dark;
+        @include border-radius(.5em);
+        .state {
+            .label { display: none; }
+            @include border-top-left-radius(.5em);
+            color: white;
+            padding: .25em .5em;
+            font-weight: bold;
+            display: inline-block;
+            white-space: nowrap;
+            #issue-state {
+                display: inline-block;
+                &::first-letter { text-transform: uppercase; }
+            }
+            &.open { background-color: $blue; }
+            &.closed { background-color: $red; }
+        }
+        p {
+                padding: .5em 1em;
+                word-wrap: break-word;
+                white-space: pre-line;
+        }
+        #updated {
+            &::before { content: ' - '; }
+            size: .9em;
+            font-style: italic;
+        }
+    }
+}
+
+
+
+/*****************************************
+ *
+ * Issues List section
+ */
+
+#repositorysearch form {
+    margin: 1em;
+    color: $black;
+    input, label {
+        font-weight: bold;
+        font-size: .9em;
+    }
+    label {
+        white-space: nowrap;
+    }
+    input {
+        color: $grey-dark;
+        border: 1px solid $grey;
+        background-color: $grey-light;
+        @include border-radius(2px);
+        padding: .3em;
+        margin: .3em;
+        &.invalid {
+            border: 2px solid red;
+        }
+        &.valid {
+            border: 2px solid green;
+        }
+        &[type="submit"] {
+            float: right;
+            margin-bottom: 1em;
+            background-color: $blue;
+            border: 0;
+            padding: .55em 1.2em .5em;
+            font-weight: bold;
+            font-size: .8em;
+            color: white;
+            text-transform: uppercase;
+            z-index: 3;
+        }
+    }
+}
+
+#repositorysearch {
+    #issueslist header,
+    article div#message { padding: 0 1em 1em; }
+    article>p {
+        padding: 1em 2em 0;
+        margin: 0;
+        font-style: italic;
+        color: $grey-dark;
+    }
+    table {
+        width: 100%;
+        thead tr {
+            background-color: $blue;
+            th {
+                padding: 1em 0;
+                text-transform: uppercase;
+                color: white;
+                /* assume last column is date in default (ugly) format */
+                /* this should nicely, automagically, split it in 2 */
+                &:last-of-type,
+                &:first-of-type {
+                    text-align: center;
+                    width: 100px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                &:nth-child(2n) {
+                    background-color: $grey-light;
+                }
+                td {
+                    &:first-of-type {
+                        text-align: center;
+                    }
+                    a {
+                        font-weight: bold;
+                        text-decoration: underline;
+                    }
+                    padding: .5em;
+                }
+            }
+            &.noissues tr td {
+                padding: 1em 0 0 2em;
+                text-align: left;
+                font-style: italic;
+                color: $grey-dark;
+            }
+            &:not(.noissues) {
+                border-bottom: 1px solid $blue;
+            }
+
+        }
+    }
+}
+
+/*
+ * In case we have to use it somewhere else ;)
+ * like on the issue detail page, to go to next issue or comments for instance.
+ */
+%rel {
+    &[rel="first"],
+    &[rel="next"],
+    &[rel="prev"],
+    &[rel="last"] {
+        min-width: 3em;
+        font-size: .8em;
+    }
+    &:not([href]) {
+        color: $grey;
+    }
+}
+
+#pager {
+    text-align: center;
+    margin: .5em 0;
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            display: inline-block;
+            border: 1px $grey solid;
+            @include border-radius(1em, 1em);
+            margin: .3em;
+            padding: .35em .3em .3em;
+            text-transform: uppercase;
+            font-size: .85em;
+            a {
+                display: inline-block;
+                min-width: 1.5em;
+                @extend %rel;
+            }
+            &:not(.disabled):hover {
+                background-color: $grey-light;
+            }
+            &.disabled {
+                font-style: italic;
+            }
+            &.current {
+                background-color: $grey-light;
+                a {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+
+.ui-menu {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+  display: block;
+  outline: none;
+  background-color: white;
+  border: 1px solid $grey-dark;
+}
+
+.ui-autocomplete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+}
+
+.ui-menu .ui-menu-item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.ui-menu .ui-menu-item a {
+    text-decoration: none;
+    display: block;
+    padding: 2px .4em;
+    line-height: 1.5;
+    min-height: 0;
+    &:hover {
+        background-color: $grey-light;
+    }
+    &.ui-state-focus,
+    &.ui-state-active {
+        background-color: $grey-light;
+    }
+
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,381 @@
+/*
+ * JavaScript SPA Task SCSS
+ */
+/*
+ * Basic HTML elements
+ */
+h1, h2, h3, h1 a, nav a {
+  color: #5f6973;
+  text-decoration: none;
+  margin: 0;
+}
+
+a {
+  color: #5f6973;
+}
+
+a[href]:hover {
+  text-decoration: underline;
+}
+
+body {
+  font-size: .9em;
+  margin: 0;
+  padding: 0;
+  font-family: Tahoma, Geneva, sans-serif;
+  /*
+   * Only for direct children ('>header'), that is the page main header & footer
+   */
+}
+body > header,
+body > footer {
+  background-color: #EFEFEF;
+  color: #5f6973;
+  clear: both;
+}
+body > header {
+  margin: 0;
+  padding: 0;
+  font-size: .9em;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(5%, #f5f5f5), color-stop(100%, #ffffff));
+  background-image: -moz-linear-gradient(top, #f5f5f5 5%, #ffffff);
+  background-image: -webkit-linear-gradient(top, #f5f5f5 5%, #ffffff);
+  background-image: linear-gradient(to bottom, #f5f5f5 5%, #ffffff);
+}
+body > header h1 {
+  margin: 0;
+  padding: 1em;
+  font-size: 1.4em;
+  font-weight: normal;
+}
+body > header:after {
+  content: ' ';
+  display: block;
+  height: 2.5px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /* FTW, stolen from you ;) */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20preserveAspectRatio%3D"none%20slice"%20width%3D"800"%20height%3D"3"%20viewBox%3D"0%200%20800%203"><style%20type%3D"text%2Fcss">.st0%7Bfill%3Aurl%28%23SVGID_1_%29%3B%7D<%2Fstyle><linearGradient%20id%3D"SVGID_1_"%20gradientUnits%3D"userSpaceOnUse"%20x1%3D"-19.943"%20y1%3D"299.886"%20x2%3D"-19.873"%20y2%3D"299.886"%20gradientTransform%3D"matrix%2811446.299%200%200%20-11446.299%20228276.484%203432587%29"><stop%20offset%3D"0"%20stop-color%3D"%23F05576"%2F><stop%20offset%3D".071"%20stop-color%3D"%23F16670"%2F><stop%20offset%3D".145"%20stop-color%3D"%23F3766B"%2F><stop%20offset%3D".214"%20stop-color%3D"%23F68E6B"%2F><stop%20offset%3D".286"%20stop-color%3D"%23FAAD6B"%2F><stop%20offset%3D".357"%20stop-color%3D"%23FDC36F"%2F><stop%20offset%3D".428"%20stop-color%3D"%23FEDF74"%2F><stop%20offset%3D".5"%20stop-color%3D"%23CED57F"%2F><stop%20offset%3D".571"%20stop-color%3D"%23A2CD86"%2F><stop%20offset%3D".643"%20stop-color%3D"%235BC094"%2F><stop%20offset%3D".714"%20stop-color%3D"%2336B69E"%2F><stop%20offset%3D".791"%20stop-color%3D"%231AACA2"%2F><stop%20offset%3D".857"%20stop-color%3D"%2325A4B8"%2F><stop%20offset%3D".928"%20stop-color%3D"%233089AD"%2F><stop%20offset%3D"1"%20stop-color%3D"%2324648C"%2F><%2FlinearGradient><path%20class%3D"st0"%20d%3D"M0%200h800v3H0z"%2F><%2Fsvg>');
+  -moz-box-shadow: 0px 1px 3px 0.06px rgba(95, 105, 115, 0.5);
+  -webkit-box-shadow: 0px 1px 3px 0.06px rgba(95, 105, 115, 0.5);
+  box-shadow: 0px 1px 3px 0.06px rgba(95, 105, 115, 0.5);
+}
+body > footer {
+  border-top: 1px solid #DEDEDE;
+  margin: 1em 0 0 0;
+  padding-bottom: 2em;
+  font-size: .8em;
+}
+body > footer:before {
+  content: ' ';
+  display: block;
+  border-top: 1px solid white;
+  margin-bottom: 2em;
+}
+body > footer div {
+  padding: 0 2em;
+  text-align: right;
+}
+
+main > section > header {
+  font-weight: bold;
+  padding: 0 0 .5em 0;
+  color: #5f6973;
+}
+main > section > article {
+  position: relative;
+  min-height: 4em;
+}
+
+#spinner {
+  position: absolute;
+  top: 2em;
+  left: 1em;
+}
+
+#message {
+  clear: both;
+  margin: 1em 0;
+}
+#message p {
+  margin: 0;
+  padding: 1em;
+  background-color: #289BC8;
+  color: white;
+  -moz-border-radius: 0.5em / 0.5em;
+  -webkit-border-radius: 0.5em 0.5em;
+  border-radius: 0.5em / 0.5em;
+}
+#message p.error {
+  background-color: #FF0000;
+  font-weight: bold;
+}
+
+/*****************************************
+ *
+ * The more specific stuff...
+ */
+.state.open::before {
+  content: '\26a0';
+  vertical-align: baseline;
+  padding-right: .25em;
+}
+.state.closed::before {
+  content: '\2713';
+  vertical-align: baseline;
+  padding-right: .25em;
+}
+
+/*****************************************
+ *
+ * Issue Detail section
+ */
+#issuedetail {
+  margin: 0 1em;
+}
+#issuedetail header nav a {
+  font-size: 1.2em;
+}
+#issuedetail header nav a::before {
+  margin-right: .1em;
+  content: '\00bb';
+}
+#issuedetail #issue header #issue-number {
+  color: #DEDEDE;
+  font-style: italic;
+}
+#issuedetail #issue header #issue-number:before {
+  content: ' #';
+}
+#issuedetail #issue article#detail {
+  border: 1px solid #5f6973;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+#issuedetail #issue article#detail .state {
+  -moz-border-radius-topleft: 0.5em;
+  -webkit-border-top-left-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+  color: white;
+  padding: .25em .5em;
+  font-weight: bold;
+  display: inline-block;
+  white-space: nowrap;
+}
+#issuedetail #issue article#detail .state .label {
+  display: none;
+}
+#issuedetail #issue article#detail .state #issue-state {
+  display: inline-block;
+}
+#issuedetail #issue article#detail .state #issue-state::first-letter {
+  text-transform: uppercase;
+}
+#issuedetail #issue article#detail .state.open {
+  background-color: #289BC8;
+}
+#issuedetail #issue article#detail .state.closed {
+  background-color: #FF0000;
+}
+#issuedetail #issue article#detail p {
+  padding: .5em 1em;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+#issuedetail #issue article#detail #updated {
+  size: .9em;
+  font-style: italic;
+}
+#issuedetail #issue article#detail #updated::before {
+  content: ' - ';
+}
+
+/*****************************************
+ *
+ * Issues List section
+ */
+#repositorysearch form {
+  margin: 1em;
+  color: #283237;
+}
+#repositorysearch form input, #repositorysearch form label {
+  font-weight: bold;
+  font-size: .9em;
+}
+#repositorysearch form label {
+  white-space: nowrap;
+}
+#repositorysearch form input {
+  color: #5f6973;
+  border: 1px solid #DEDEDE;
+  background-color: #EFEFEF;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: .3em;
+  margin: .3em;
+}
+#repositorysearch form input.invalid {
+  border: 2px solid red;
+}
+#repositorysearch form input.valid {
+  border: 2px solid green;
+}
+#repositorysearch form input[type="submit"] {
+  float: right;
+  margin-bottom: 1em;
+  background-color: #289BC8;
+  border: 0;
+  padding: .55em 1.2em .5em;
+  font-weight: bold;
+  font-size: .8em;
+  color: white;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+#repositorysearch #issueslist header,
+#repositorysearch article div#message {
+  padding: 0 1em 1em;
+}
+#repositorysearch article > p {
+  padding: 1em 2em 0;
+  margin: 0;
+  font-style: italic;
+  color: #5f6973;
+}
+#repositorysearch table {
+  width: 100%;
+}
+#repositorysearch table thead tr {
+  background-color: #289BC8;
+}
+#repositorysearch table thead tr th {
+  padding: 1em 0;
+  text-transform: uppercase;
+  color: white;
+  /* assume last column is date in default (ugly) format */
+  /* this should nicely, automagically, split it in 2 */
+}
+#repositorysearch table thead tr th:last-of-type, #repositorysearch table thead tr th:first-of-type {
+  text-align: center;
+  width: 100px;
+}
+#repositorysearch table tbody tr:nth-child(2n) {
+  background-color: #EFEFEF;
+}
+#repositorysearch table tbody tr td {
+  padding: .5em;
+}
+#repositorysearch table tbody tr td:first-of-type {
+  text-align: center;
+}
+#repositorysearch table tbody tr td a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+#repositorysearch table tbody.noissues tr td {
+  padding: 1em 0 0 2em;
+  text-align: left;
+  font-style: italic;
+  color: #5f6973;
+}
+#repositorysearch table tbody:not(.noissues) {
+  border-bottom: 1px solid #289BC8;
+}
+
+/*
+ * In case we have to use it somewhere else ;)
+ * like on the issue detail page, to go to next issue or comments for instance.
+ */
+#pager ul li a[rel="first"], #pager ul li a[rel="next"], #pager ul li a[rel="prev"], #pager ul li a[rel="last"] {
+  min-width: 3em;
+  font-size: .8em;
+}
+#pager ul li a:not([href]) {
+  color: #DEDEDE;
+}
+
+#pager {
+  text-align: center;
+  margin: .5em 0;
+}
+#pager ul {
+  padding: 0;
+  margin: 0;
+}
+#pager ul li {
+  display: inline-block;
+  border: 1px #DEDEDE solid;
+  -moz-border-radius: 1em / 1em;
+  -webkit-border-radius: 1em 1em;
+  border-radius: 1em / 1em;
+  margin: .3em;
+  padding: .35em .3em .3em;
+  text-transform: uppercase;
+  font-size: .85em;
+}
+#pager ul li a {
+  display: inline-block;
+  min-width: 1.5em;
+}
+#pager ul li:not(.disabled):hover {
+  background-color: #EFEFEF;
+}
+#pager ul li.disabled {
+  font-style: italic;
+}
+#pager ul li.current {
+  background-color: #EFEFEF;
+}
+#pager ul li.current a {
+  font-weight: bold;
+}
+
+.ui-menu {
+  list-style: none;
+  padding: 2px;
+  margin: 0;
+  display: block;
+  outline: none;
+  background-color: white;
+  border: 1px solid #5f6973;
+}
+
+.ui-autocomplete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+}
+
+.ui-menu .ui-menu-item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.ui-menu .ui-menu-item a {
+  text-decoration: none;
+  display: block;
+  padding: 2px .4em;
+  line-height: 1.5;
+  min-height: 0;
+}
+.ui-menu .ui-menu-item a:hover {
+  background-color: #EFEFEF;
+}
+.ui-menu .ui-menu-item a.ui-state-focus, .ui-menu .ui-menu-item a.ui-state-active {
+  background-color: #EFEFEF;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
+
+/*# sourceMappingURL=style.css.map */
